@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- <script src="{% static 'advertising.js' %}" defer></script> -->
+    <script src="{% static 'news.js' %}" defer></script>
+    <title>Toys Shop</title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo">
+            <h4>Toys Shop</h4>
+        </div>
+
+        <ul class="nav-links">
+            <li><a class="nav-link" href="/">Магазин</a></li>
+            <li><a class="active" href="/news/">Новини</a></li>
+        </ul>
+
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+                <li><a class="nav-link" href="/auth/logout">Вийти</a></li>
+                <li><a class="nav-link" href="/auth/profile">Профіль</a></li>
+            {% else %}
+                <li><a class="nav-link" href="/auth/login">Вхід</a></li>
+                <li><a class="nav-link" href="/auth/register">Реєстрація</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <header id="header">
+        <div class="header">
+            <p>Підпишіться на повідомлення</p>
+            <button id="subscribe-header">Підписатися</button>
+            <button id="close-button">Закрити</button>
+        </div>
+    </header>
+
+    <main class="news-main">
+        <div class="news" id="news">
+            <!-- <div class="news-item">
+                <h2>Опитування: українці все менше вірять у правильність шляху країни</h2>
+                <div class="news-content" id="news-content">
+                    <p>
+                        Частка українців, які вважають, що Україна рухається в правильному напрямку, продовжує зменшуватися.
+                        Джерело: результати соціологічного опитування, що проводилося соціологічною службою Центру Разумкова з 19 по 25 січня 2024 року
+                        Дослівно: "Після початку повномасштабної агресії Росії проти України частка громадян, які вважають, що події в Україні розвиваються у правильному напрямі, істотно зросла (з 20% у грудні 2021р. до 51% у вересні–жовтні 2022р., досягши найвищих показників у лютому–березні 2023р. (61%). 
+                        Після цього спостерігається тенденція зниження цього показника. За даними останнього опитування, частки тих, хто вважає, що події в Україні розвиваються у правильному напрямі (41%) і тих, хто дотримується думки, що вони розвиваються в неправильному напрямі (38%), статистично значуще не відрізняються (21% не визначилися)".
+                        Довідково: Згідно з результатами опитування за грудень, 45% українців вважали, що події розвивалися у правильному напрямку, 33% – що в неправильному, 21,5% – не визначилися.
+                        Деталі: Згідно з результатами опитування за січень, найчастіше громадяни вказують на погіршення ситуації (порівняно з початком 2023 року) в таких сферах: рівень цін і тарифів (на погіршення ситуації вказали 86%), економічне становище країни (68%), рівень стабільності (64,5%), упевненість громадян у завтрашньому дні (63,5%), рівень добробуту їхньої родини (58%), ставлення громадян до влади (53%). 61% опитаних вказують на погіршення ситуації в країні в цілому.
+                    </p>
+                </div>
+                <div class="news-footer">
+                    <div class="news-date">
+                        <p>Дата публікації: 25.01.2024</p>
+                    </div>
+                    <span class="material-symbols-outlined" id="open-news">
+                        arrow_downward
+                    </span>
+                </div>
+            </div> -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <div class="footer-logo">
+                <h4>Toys Shop</h4>
+            </div>
+            <ul class="footer-links">
+                <li><a class="footer-link" href="index.html">Магазин</a></li>
+                <li><a class="footer-link" href="about.html">Про нас</a></li>
+                <li><a class="footer-link" href="services.html">Контакти</a></li>
+            </ul>
+            <ul class="footer-links">
+                <li><a class="footer-link" href="login.html">Вхід</a></li>
+                <li><a class="footer-link" href="register.html">Реєстрація</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

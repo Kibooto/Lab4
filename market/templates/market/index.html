@@ -1,0 +1,378 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <script src="{% static 'script.js' %}" defer></script>
+    <script src="{% static 'advertising.js' %}" defer></script>
+    <title>Toys Shop</title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo">
+            <h4>Toys Shop</h4>
+        </div>
+
+        <ul class="nav-links">
+            <li><a class="active" href="/">Магазин</a></li>
+            <li><a class="nav-link" href="/news/">Новини</a></li>
+        </ul>
+
+        <ul class="nav-links">
+            <li><span class="material-symbols-outlined nav-basket" id="basket-button">shopping_basket</span></li>
+            {% if user.is_authenticated %}
+                <li><a class="nav-link" href="/auth/logout">Вийти</a></li>
+                <li><a class="nav-link" href="/auth/profile">Профіль</a></li>
+            {% else %}
+                <li><a class="nav-link" href="/auth/login">Вхід</a></li>
+                <li><a class="nav-link" href="/auth/register">Реєстрація</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- <div class="modal" id="modal-basket">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal-button">&times;</span>
+            <span class="timer" id="timer"></span>
+            <div class="modal-text">
+                <h1>Реклама</h1>
+                <p>Отримайте знижку 10%</p>
+                <button id="subscribe">Підписатися на повідомлення</button>
+            </div>
+        </div>
+    </div> -->
+
+    <header id="header">
+        <div class="header">
+            <p>Підпишіться на повідомлення</p>
+            <button id="subscribe-header">Підписатися</button>
+            <button id="close-button">Закрити</button>
+        </div>
+    </header>
+
+    <div class="basket-modal" id="basket-modal">
+        <div class="basket-modal-content">
+            <div class="basket-up-container">
+                <span class="basket-close-button" id="close-basket-button">&times;</span>
+                <div class="modal-text">
+                    <h1>Кошик</h1>
+                </div>
+                <div class="basket-items" id="basket-items">
+                    <!-- <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div>
+                    <div class="basket-item">
+                        <img src="static/images/toy1.webp" alt="">
+                        <h4>Конструктор LEGO</h4>
+                        <div class="item-buy">
+                            <input type="number" value="1" min="1" max="10">
+                            <p>1000 грн</p>
+                            <button>Видалити</button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="basket-down-container">
+                <div class="basket-total">
+                    <p>Загальна сума: <span id="total">0</span></p>
+                </div>
+                {% if user.is_authenticated %}
+                    <button class="buy-button">Замовити</button>
+                {% else %}
+                    <a href="/auth/login" class="buy-button">Увійдіть щоб купити</a>
+                {% endif %}
+            </div> 
+        </div>
+        <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal-button">&times;</span>
+            <span class="timer" id="timer"></span>
+            <div class="modal-text">
+                <h1>Реклама</h1>
+                <p>Отримайте знижку 10%</p>
+                <button id="subscribe">Підписатися на повідомлення</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <canvas id="myChart" width="400px" height="400px"></canvas> -->
+
+    <div class="sort" id="sort-field">
+        <div class="input-field">
+            <input id="filter-input" type="text" class="sort-input", placeholder="Пошук...">
+        </div>
+
+        <div class="price-field">
+            <input id="price-min" type="text" class="price-input" placeholder="Від">
+            <input id="price-max" type="text" class="price-input" placeholder="До">
+        </div>
+
+        <div class="sort-field">
+            <select name="sort" id="sort" class="sort-select">
+                <option value="name">За назвою</option>
+                <option value="pricedown">Від дорогих до дешевих</option>
+                <option value="priceup">Від дешевих до дорогих</option>
+            </select>
+        </div>
+    </div>
+
+    <main class="catalog-page">
+        <section class="catalog">
+            <!-- <aside class="catalog-aside-sex">
+                <h3>Стать</h3>
+                <ul class="catalog-category">
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">Для хлопчиків</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">Для дівчаток</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">Для обох</label>
+                    </div>
+                </ul>
+            </aside>
+
+            <aside class="catalog-aside">
+                <h3>Категорії</h3>
+                <ul class="catalog-category">
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">Конструктори</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">Ляльки</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">Машинки</label>
+                    </div>
+                </ul>
+            </aside>
+
+            <aside class="catalog-aside-age">
+                <h3>Вік</h3>
+                <ul class="catalog-category">
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">0-3 роки</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">3-6 років</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">6-9 років</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">9-12 років</label>
+                    </div>
+                    <div class="category">
+                        <input type="checkbox" name="" id="">
+                        <label for="">12+ років</label>
+                    </div>
+                </ul>
+            </aside> -->
+
+            <div class="catalog-items" id="cards">
+                <!-- <div class="catalog-item">
+                    <img src="../../../toys/lego.webp" alt="">
+                    <h4>Конструктор LEGO</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div> -->
+                <!-- 
+                <div class="catalog-item">
+                    <img src="static/images/toy2.webp" alt="">
+                    <h4>Лялька Барбі</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy3.webp" alt="">
+                    <h4>Машинка</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy4.webp" alt="">
+                    <h4>Конструктор LEGO</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy5.webp" alt="">
+                    <h4>Лялька Барбі</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy6.webp" alt="">
+                    <h4>Машинка</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy1.webp" alt="">
+                    <h4>Конструктор LEGO</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy2.webp" alt="">
+                    <h4>Лялька Барбі</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy3.webp" alt="">
+                    <h4>Машинка</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy4.webp" alt="">
+                    <h4>Конструктор LEGO</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy5.webp" alt="">
+                    <h4>Лялька Барбі</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div>
+                <div class="catalog-item">
+                    <img src="static/images/toy6.webp" alt="">
+                    <h4>Машинка</h4>
+                    <div class="item-buy">
+                        <p>1000 грн</p>
+                        <button>Купити</button>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <div class="footer-logo">
+                <h4>Toys Shop</h4>
+            </div>
+            <ul class="footer-links">
+                <li><a class="footer-link" href="index.html">Магазин</a></li>
+                <li><a class="footer-link" href="about.html">Про нас</a></li>
+                <li><a class="footer-link" href="services.html">Контакти</a></li>
+            </ul>
+            <ul class="footer-links">
+                <li><a class="footer-link" href="login.html">Вхід</a></li>
+                <li><a class="footer-link" href="register.html">Реєстрація</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
